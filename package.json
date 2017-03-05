@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "7.1.0",
+    "npm": "3.10.9"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.0",
+    "compression": "^1.6.2",
+    "express": "^4.15.0",
+    "mongoose": "^4.8.5",
+    "mongoose-slug-generator": "^1.0.4",
+    "pug": "^2.0.0-beta11"
+  }
+}

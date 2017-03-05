@@ -1,0 +1,29 @@
+extends layout
+
+block body
+  section.hero
+    if project
+      h1 !{project.name}
+      h2 !{project.slogan}
+    else
+      h1: span(contenteditable)#project-name Project name (edit me)
+      h2: span(contenteditable)#project-slogan Project slogan (edit me)
+  section.section
+    .container
+      h3 Support
+      ol#widget-list
+  section.section
+    .container
+      h3 Add a widget
+      form#widget-form.widget-form
+        .widget-form__input
+          select#widget.input
+          label(for='widget'): small Add another way to support the project
+        .widget-form__button
+          button(type='submit').button Add
+  if project
+    script.
+      window.projectSlug = '!{project.slug}';
+      window.projectWidgets = !{JSON.stringify(project.widgets)};
+  script(src='/assets/widgets.js')
+  script(src='/assets/app.js')
