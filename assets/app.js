@@ -118,12 +118,12 @@
         setLoadingState(false);
       });
     } else {
-      setLoadingState(true);
-
       widgetParams = getParams(widgetId);
       if (widgetParams == null) {
         return;
       }
+
+      setLoadingState(true);
 
       addWidget(window.projectSlug, widgetId, widgetParams, function() {
         setLoadingState(false);
