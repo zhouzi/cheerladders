@@ -106,8 +106,8 @@
         return;
       }
 
-      nameElement.parentElement.innerHTML = name;
-      sloganElement.parentElement.innerHTML = slogan;
+      nameElement.parentElement.textContent = name;
+      sloganElement.parentElement.textContent = slogan;
 
       setLoadingState(true);
 

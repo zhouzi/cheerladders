@@ -4,7 +4,7 @@ block body
   section.hero
     h1 Support ain't about money.
     h2.
-      There are at least #[strong !{nWidgets}] ways you can help without spending a dime.
+      There are at least #[strong #{nWidgets}] ways you can help without spending a dime.
     ul.list-inline
       li: a(href='#examples').button Examples
       li: a(href='/create').button Create a page
@@ -16,7 +16,7 @@ block body
       h3#examples Examples
       ul
         for project in projects
-          li: a(href='/support/' + project.slug) !{project.name}, !{project.slogan}
+          li: a(href='/support/' + project.slug) #{project.name}, #{project.slogan}
   section.section
     .container
       h3#contribute Contribute

@@ -3,8 +3,8 @@ extends layout
 block body
   section.hero
     if project
-      h1 !{project.name}
-      h2 !{project.slogan}
+      h1 #{project.name}
+      h2 #{project.slogan}
     else
       h1: span(contenteditable)#project-name Project name (edit me)
       h2: span(contenteditable)#project-slogan Project slogan (edit me)
@@ -25,7 +25,7 @@ block body
           button(type='submit').button Add
   if project
     script.
-      window.projectSlug = '!{project.slug}';
+      window.projectSlug = '#{project.slug}';
       window.projectWidgets = !{JSON.stringify(project.widgets)};
   script(src='/assets/widgets.js')
   script(src='/assets/app.js')

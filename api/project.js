@@ -1,8 +1,48 @@
+const _ = require('lodash');
 const router = require('express').Router();
 const Project = require('../models/project');
 
+function isValidWidget(widget) {
+  if (widget == null) {
+    return false;
+  }
+
+  return (
+       _.isString(widget.name)
+    && _.isObject(widget.params)
+    && _.every(_.values(widget.params), _.isString)
+  );
+}
+
+function isValidProject(project) {
+  if (project == null) {
+    return false;
+  }
+
+  return (
+       _.isString(project.name)
+    && _.isString(project.slogan)
+    && _.isArray(project.widgets)
+    && _.every(project.widgets, isValidWidget)
+  );
+}
+
 router.post('/', (req, res) => {
-  new Project(req.body)
+  const project = _.pick(req.body, [
+    'name',
+    'slogan',
+    'widgets',
+  ]);
+
+  if (!isValidProject(project)) {
+    res.status(400);
+    res.json({
+      err: 'non-compliant data',
+    });
+    return;
+  }
+
+  new Project(project)
     .save()
     .then(project => res.json(project))
     .catch((err) => {
@@ -14,6 +54,19 @@ router.post('/', (req, res) => {
 });
 
 router.post('/:slug/widget', (req, res) => {
+  const widget = _.pick(req.body, [
+    'name',
+    'params',
+  ]);
+
+  if (!isValidWidget(widget)) {
+    res.status(400);
+    res.json({
+      err: 'non-compliant data',
+    });
+    return;
+  }
+
   Project
     .findOne({ slug: req.params.slug })
     .then((project) => {
@@ -24,7 +77,7 @@ router.post('/:slug/widget', (req, res) => {
       return project;
     })
     .then((project) => {
-      project.widgets.push(req.body);
+      project.widgets.push(widget);
       return project.save();
     })
     .then(project => res.json(project))
