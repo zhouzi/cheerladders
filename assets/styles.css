@@ -103,6 +103,17 @@ small {
   margin: 0 auto;
 }
 
+.container--large {
+  max-width: 800px;
+}
+
+.lead {
+  font-size: 1.2rem;
+  font-style: italic;
+  padding: 2rem 0;
+  margin: 0;
+}
+
 .button,
 .input {
   padding: 0.8rem 1rem;
@@ -113,6 +124,8 @@ small {
 
 .input {
   -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   background-color: #eaeaea;
 }
 
@@ -144,7 +157,11 @@ select.input {
 .footer {
   font-size: 0.8rem;
   padding: 1rem;
-  background-color: #eaeaea;
+}
+
+.footer__container {
+  padding-top: 0.5rem;
+  border-top: 1px solid #eaeaea;
 }
 
 @media (min-width: 600px) {
