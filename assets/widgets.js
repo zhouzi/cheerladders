@@ -17,7 +17,23 @@
         handle: 'What is your Twitter handle?',
       },
       render: function(wrapper, params) {
-        wrapper.innerHTML = '<a href="https://twitter.com/' + params.handle + '" target="_blank">Follow us on Twitter</a>';
+        wrapper.innerHTML = '<a class="twitter-follow-button" href="https://twitter.com/' + params.handle + '" target="_blank">Follow @' + params.handle + '</a>';
+        window.twttr = (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+          if (d.getElementById(id)) return t;
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "https://platform.twitter.com/widgets.js";
+          fjs.parentNode.insertBefore(js, fjs);
+
+          t._e = [];
+          t.ready = function(f) {
+            t._e.push(f);
+          };
+
+          return t;
+        }(document, "script", "twitter-wjs"));
       },
     },
     tweet: {
@@ -26,7 +42,23 @@
         content: 'What\'s the tweet\'s content?',
       },
       render: function(wrapper, params) {
-        wrapper.innerHTML = '<a href="https://twitter.com/intent/tweet?source=webclient&text=' + encodeURIComponent(params.content) + '" target="_blank">Tweet</a>';
+        wrapper.innerHTML = '<a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(params.content) + '" target="_blank">Tweet</a>';
+        window.twttr = (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+          if (d.getElementById(id)) return t;
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "https://platform.twitter.com/widgets.js";
+          fjs.parentNode.insertBefore(js, fjs);
+
+          t._e = [];
+          t.ready = function(f) {
+            t._e.push(f);
+          };
+
+          return t;
+        }(document, "script", "twitter-wjs"));
       },
     },
   };
