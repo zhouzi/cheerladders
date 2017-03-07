@@ -18,7 +18,10 @@ const Project = new Schema({
 });
 
 Project.pre('save', function(next) {
-  this.token = shortid.generate();
+  if (this.token == null) {
+    this.token = shortid.generate();
+  }
+
   next();
 });
 
