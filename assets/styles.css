@@ -21,7 +21,8 @@ h2,
 h3,
 p,
 ul,
-ol {
+ol,
+li {
   margin: 0 0 0.5rem 0;
 }
 
@@ -81,7 +82,7 @@ small {
 .list-inline li {
   display: inline-block;
   vertical-align: middle;
-  margin-right: 0.5rem;
+  margin: 0 0.5rem 0 0;
 }
 
 .hero {
@@ -214,4 +215,14 @@ select.input {
 
 .widget-form__button {
   width: 30%;
+}
+
+.widget-wrapper,
+.widget-wrapper iframe {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.widget-wrapper {
+  margin-left: 0.5rem;
 }

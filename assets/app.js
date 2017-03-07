@@ -40,10 +40,19 @@
   var widgetList = document.getElementById('widget-list');
   function renderWidget(widgetName, params) {
     var widgetItem = document.createElement('li');
+
+    var widgetCheckbox = document.createElement('input');
+    widgetCheckbox.setAttribute('type', 'checkbox');
+    widgetItem.appendChild(widgetCheckbox);
+
+    var widgetWrapper = document.createElement('div');
+    widgetWrapper.classList.add('widget-wrapper');
+    widgetItem.appendChild(widgetWrapper);
+
     widgetList.appendChild(widgetItem);
 
     var render = window.widgets[widgetName].render;
-    render(widgetItem, params);
+    render(widgetWrapper, params);
   }
 
   var widgetForm = document.getElementById('widget-form');
