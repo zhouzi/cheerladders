@@ -10,9 +10,12 @@ const express = require('express');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const app = express();
+
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.locals.trackingId = config.trackingId;
 
 const viewsDir = path.join(__dirname, 'views');
 app.set('views', viewsDir);

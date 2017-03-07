@@ -23,6 +23,7 @@ npm start
 
 * `PORT` - port the application listens to, default to `3000`.
 * `MONGO_URL` - mongo url the application connects to, default to `localhost/cheerladders`.
+* `TRACKING_ID` - Google Analytics tracking id, default to `''`.
 
 ### Adding a widget
 
