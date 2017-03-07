@@ -27,6 +27,16 @@ function isValidProject(project) {
   );
 }
 
+function getProjectPublicProps(project) {
+  return _.pick(project, [
+    'slug',
+    'name',
+    'slogan',
+    'token',
+    'widgets',
+  ]);
+}
+
 router.post('/', (req, res) => {
   const project = _.pick(req.body, [
     'name',
@@ -44,7 +54,7 @@ router.post('/', (req, res) => {
 
   new Project(project)
     .save()
-    .then(project => res.json(project))
+    .then(project => res.json(getProjectPublicProps(project)))
     .catch((err) => {
       res.status(500);
       res.json({
@@ -68,7 +78,7 @@ router.post('/:slug/widget', (req, res) => {
   }
 
   Project
-    .findOne({ slug: req.params.slug })
+    .findOne({ slug: req.params.slug, token: req.body.projectToken })
     .then((project) => {
       if (project == null) {
         throw new Error('not found');
@@ -80,7 +90,7 @@ router.post('/:slug/widget', (req, res) => {
       project.widgets.push(widget);
       return project.save();
     })
-    .then(project => res.json(project))
+    .then(project => res.json(getProjectPublicProps(project)))
     .catch((err) => {
       res.status(500);
       res.json({

@@ -187,7 +187,7 @@ select.input {
 }
 
 .widget-form {
-  margin: 0 -0.5rem;
+  margin: 0 -0.5rem 1rem -0.5rem;
 }
 
 .widget-form::before,

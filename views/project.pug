@@ -12,9 +12,9 @@ block body
     .container
       p.lead
         | Thank you very much for taking the time to support the project.
-        | Please find below a list of all the ways you can help us with a few clicks.
+        | Please find below a list of all the ways you can greatly help us thanks to a few clicks.
       ol#widget-list
-  section.section
+  section.section(style=project ? 'display: none' : '')#widget-form-container
     .container
       h3 Add a widget
       p: label(for='widget') Add another way to support the project.
@@ -24,6 +24,8 @@ block body
 
         .widget-form__button
           button(type='submit').button Add
+      p(style=project ? '' : 'display: none')#share-link
+        | Share this link to allow other users to add widgets to this page: #[a(href=project ? '/support/' + project.slug + '?token=' + project.token : '#', target='_blank') share link.]
   if project
     script.
       window.projectSlug = '#{project.slug}';

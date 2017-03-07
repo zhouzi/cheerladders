@@ -22,7 +22,7 @@
     }));
   }
 
-  function addWidget(projectSlug, widgetName, widgetParams, callback) {
+  function addWidget(projectSlug, projectToken, widgetName, widgetParams, callback) {
     var req = new XMLHttpRequest();
     req.open('POST', '/api/project/' + projectSlug + '/widget');
     req.setRequestHeader('Content-Type', 'application/json');
@@ -34,6 +34,7 @@
     req.send(JSON.stringify({
       name: widgetName,
       params: widgetParams,
+      projectToken: projectToken,
     }));
   }
 
@@ -58,6 +59,7 @@
   var widgetForm = document.getElementById('widget-form');
   var widgetSelect = widgetForm.querySelector('select');
   var widgetSubmitButton = widgetForm.querySelector('button');
+  var shareLink = document.getElementById('share-link');
 
   function setLoadingState(isLoading) {
     if (isLoading) {
@@ -122,7 +124,15 @@
 
       createProject(nameElement.textContent, sloganElement.textContent, widgetId, widgetParams, function(project) {
         window.projectSlug = project.slug;
-        history.replaceState({}, document.title, '/support/' + project.slug);
+        window.localStorage.setItem(project.slug, project.token);
+
+        var ownerUrl = '/support/' + project.slug + '?token=' + project.token;
+        history.replaceState({}, document.title, ownerUrl);
+
+        renderWidget(widgetId, widgetParams);
+
+        shareLink.querySelector('a').setAttribute('href', ownerUrl);
+        shareLink.style.display = '';
 
         setLoadingState(false);
       });
@@ -134,12 +144,11 @@
 
       setLoadingState(true);
 
-      addWidget(window.projectSlug, widgetId, widgetParams, function() {
+      addWidget(window.projectSlug, window.localStorage.getItem(window.projectSlug), widgetId, widgetParams, function() {
+        renderWidget(widgetId, widgetParams);
         setLoadingState(false);
       });
     }
-
-    renderWidget(widgetId, widgetParams);
   });
 
   for (var id in window.widgets) {
@@ -158,5 +167,14 @@
     window.projectWidgets.forEach(function(widget) {
       renderWidget(widget.name, widget.params);
     });
+  }
+
+  var token = location.search.match(/token=([a-z0-9]+)/i);
+  if (token != null) {
+    window.localStorage.setItem(window.projectSlug, token[1]);
+  }
+
+  if (window.localStorage.getItem(window.projectSlug) != null) {
+    document.getElementById('widget-form-container').style.display = '';
   }
 })();
