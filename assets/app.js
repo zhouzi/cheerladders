@@ -1,16 +1,20 @@
 (function() {
   'use strict';
 
-  function createProject(name, slogan, widgetName, params, callback) {
+  function request(url, method, body, callback) {
     var req = new XMLHttpRequest();
-    req.open('POST', '/api/project');
+    req.open(method, url);
     req.setRequestHeader('Content-Type', 'application/json');
     req.onreadystatechange = function () {
       if (req.readyState === 4 && req.status === 200) {
         callback(JSON.parse(req.response));
       }
     };
-    req.send(JSON.stringify({
+    req.send(body);
+  }
+
+  function createProject(name, slogan, widgetName, params, callback) {
+    request('/api/project', 'POST', JSON.stringify({
       name: name,
       slogan: slogan,
       widgets: [
@@ -19,23 +23,19 @@
           params: params,
         },
       ],
-    }));
+    }), callback);
   }
 
   function addWidget(projectSlug, projectToken, widgetName, widgetParams, callback) {
-    var req = new XMLHttpRequest();
-    req.open('POST', '/api/project/' + projectSlug + '/widget');
-    req.setRequestHeader('Content-Type', 'application/json');
-    req.onreadystatechange = function () {
-      if (req.readyState === 4 && req.status === 200) {
-        callback(JSON.parse(req.response));
-      }
-    };
-    req.send(JSON.stringify({
+    request('/api/project/' + projectSlug + '/widget', 'POST', JSON.stringify({
       name: widgetName,
       params: widgetParams,
       projectToken: projectToken,
-    }));
+    }), callback);
+  }
+
+  function isValidToken(projectSlug, token, callback) {
+    request('/api/project/' + projectSlug + '?token=' + token, 'GET', null, callback);
   }
 
   var widgetList = document.getElementById('widget-list');
@@ -126,13 +126,10 @@
         window.projectSlug = project.slug;
         window.localStorage.setItem(project.slug, project.token);
 
-        var ownerUrl = '/support/' + project.slug + '?token=' + project.token;
-        history.replaceState({}, document.title, ownerUrl);
+        history.replaceState({}, document.title, '/support/' + project.slug + '?token=' + project.token);
 
         renderWidget(widgetId, widgetParams);
-
-        shareLink.querySelector('a').setAttribute('href', ownerUrl);
-        shareLink.style.display = '';
+        updateShareLinkUrl();
 
         setLoadingState(false);
       });
@@ -150,6 +147,11 @@
       });
     }
   });
+
+  function updateShareLinkUrl() {
+    shareLink.querySelector('a').setAttribute('href', '/support/' + window.projectSlug + '?token=' + window.localStorage.getItem(window.projectSlug));
+    shareLink.style.display = '';
+  }
 
   for (var id in window.widgets) {
     if (!window.widgets.hasOwnProperty(id)) {
@@ -174,7 +176,11 @@
     window.localStorage.setItem(window.projectSlug, token[1]);
   }
 
-  if (window.localStorage.getItem(window.projectSlug) != null) {
-    document.getElementById('widget-form-container').style.display = '';
+  var projectToken = window.localStorage.getItem(window.projectSlug);
+  if (projectToken != null) {
+    isValidToken(window.projectSlug, projectToken, function() {
+      document.getElementById('widget-form-container').style.display = '';
+      updateShareLinkUrl();
+    });
   }
 })();

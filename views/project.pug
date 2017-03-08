@@ -24,8 +24,8 @@ block body
 
         .widget-form__button
           button(type='submit').button Add
-      p(style=project ? '' : 'display: none')#share-link
-        | Share this link to allow other users to add widgets to this page: #[a(href=project ? '/support/' + project.slug + '?token=' + project.token : '#', target='_blank') share link.]
+      p(style='display: none')#share-link
+        | Share this link to allow other users to add widgets to this page: #[a(href='#', target='_blank') share link.]
   if project
     script.
       window.projectSlug = '#{project.slug}';

@@ -99,4 +99,23 @@ router.post('/:slug/widget', (req, res) => {
     });
 });
 
+router.get('/:slug', (req, res) => {
+  Project
+    .findOne({ slug: req.params.slug, token: req.query.token })
+    .then((project) => {
+      if (project == null) {
+        throw new Error('not found');
+      }
+
+      return project;
+    })
+    .then(project => res.json(getProjectPublicProps(project)))
+    .catch((err) => {
+      res.status(500);
+      res.json({
+        err: err.message,
+      });
+    });
+});
+
 module.exports = router;
