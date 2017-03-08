@@ -45,3 +45,5 @@ The structure of a widget is as follows:
 * **name**: used as display value when selecting a widget to add.
 * **params**: a map of params with the key being the identifier and value a question to ask the user.
 * **render**: a function that receives a wrapper and the provided params - renders the widget.
+
+The render function can return `false` if the widget should't be rendered at all (e.g when using a browser-dependent feature).

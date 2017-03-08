@@ -50,10 +50,12 @@
     widgetWrapper.classList.add('widget-wrapper');
     widgetItem.appendChild(widgetWrapper);
 
-    widgetList.appendChild(widgetItem);
-
     var render = window.widgets[widgetName].render;
-    render(widgetWrapper, params);
+    var result = render(widgetWrapper, params);
+
+    if (result !== false) {
+      widgetList.appendChild(widgetItem);
+    }
   }
 
   var widgetForm = document.getElementById('widget-form');
