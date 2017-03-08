@@ -173,7 +173,7 @@
     });
   }
 
-  var token = location.search.match(/token=([a-z0-9]+)/i);
+  var token = location.search.match(/token=([A-Za-z0-9_-]+)/);
   if (token != null) {
     window.localStorage.setItem(window.projectSlug, token[1]);
   }
