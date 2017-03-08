@@ -41,7 +41,7 @@
       },
     },
     tweet: {
-      name: 'Share on Twitter',
+      name: 'Tweet',
       params: {
         content: 'What\'s the tweet\'s content?',
       },
