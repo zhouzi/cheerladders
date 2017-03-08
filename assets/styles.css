@@ -53,13 +53,17 @@ h3 {
   text-transform: uppercase;
 }
 
-a {
+a,
+.link {
+  cursor: pointer;
   color: #655af9;
   text-decoration: none;
 }
 
 a:focus,
-a:hover {
+a:hover,
+.link:focus,
+.link:hover {
   color: #2f2b42;
   text-decoration: underline;
 }
