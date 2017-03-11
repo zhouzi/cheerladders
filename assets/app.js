@@ -42,10 +42,6 @@
   function renderWidget(widgetName, params) {
     var widgetItem = document.createElement('li');
 
-    var widgetCheckbox = document.createElement('input');
-    widgetCheckbox.setAttribute('type', 'checkbox');
-    widgetItem.appendChild(widgetCheckbox);
-
     var widgetWrapper = document.createElement('div');
     widgetWrapper.classList.add('widget-wrapper');
     widgetItem.appendChild(widgetWrapper);
