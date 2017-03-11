@@ -5,7 +5,15 @@ Support ain't about money.
 * [Home](https://cheerladders.xyz/)
 * [Examples](https://cheerladders.xyz/#examples)
 * [Create a page](https://cheerladders.xyz/create)
+* [Current State](#current-state)
 * [Contribute](#contribute)
+
+## Current State
+
+For now the project is more a proof of concept than a finished product.
+The workflow is pretty simple and the ui/ux could easily be improved.
+I'll be working on it for the next iteration if it gets some traction.
+In the mean time, feel free to contribute to any aspect you please.
 
 ## Contribute
 
