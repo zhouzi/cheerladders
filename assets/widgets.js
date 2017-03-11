@@ -131,6 +131,24 @@
         loadFacebookWidget();
       },
     },
+    redditShare: {
+      name: 'Share on Reddit',
+      params: {
+        url: 'What\'s the url to share on Reddit?',
+      },
+      render: function(wrapper, params) {
+        wrapper.innerHTML = '<a href="//www.reddit.com/submit?url=' + encodeURIComponent(params.url) + '" target="_blank"><img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" /></a>';
+      },
+    },
+    redditUpvote: {
+      name: 'Upvote on Reddit',
+      params: {
+        url: 'What\'s the url of the page that should be upvoted on Reddit?\n\nPlease provide the url of the page shared on Reddit, not the url of the Reddit post.',
+      },
+      render: function(wrapper, params) {
+        wrapper.innerHTML = '<iframe src="//www.redditstatic.com/button/button1.html?url=' + encodeURIComponent(params.url) + '&newwindow=1" height="22" width="120" scrolling="no" frameborder="0"></iframe>';
+      },
+    },
   };
 
   function once(fn) {
