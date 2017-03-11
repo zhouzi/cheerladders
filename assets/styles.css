@@ -26,6 +26,10 @@ li {
   margin: 0 0 0.5rem 0;
 }
 
+p {
+  margin-bottom: 1rem;
+}
+
 h1,
 h2,
 h3 {
@@ -101,6 +105,10 @@ small {
 
 .section {
   padding: 2rem 1rem;
+}
+
+.section--background {
+  background-color: #eaeaea;
 }
 
 .container {
@@ -229,4 +237,58 @@ select.input {
 
 .widget-wrapper {
   margin-left: 0.5rem;
+}
+
+.features {
+  text-align: center;
+}
+
+.features__item {
+  margin-bottom: 1rem;
+}
+
+.features__emoji {
+  width: 80px;
+  height: auto;
+  display: block;
+  margin: 0 auto 1rem auto;
+}
+
+.round {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background-color: #dadada;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+
+.table-layout__master,
+.table-layout__slave {
+  display: block;
+}
+
+.table-layout__master:first-child {
+  margin-bottom: 0.5rem;
+}
+
+.table-layout__master:last-child {
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 800px) {
+  .features {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin: 0 -0.5rem;
+  }
+
+  .features__item {
+    display: table-cell;
+    vertical-align: top;
+    padding: 0 0.5rem;
+  }
 }

@@ -8,19 +8,52 @@ block body
     ul.list-inline
       li: a(href='#examples').button Examples
       li: a(href='/create').button Create a page
+  .section
+    .container
+      h3#how-it-works How it works
+      p Create a page on cheerladders.xyz with a list of all the ways people can support your project for free (e.g tweet, up vote on ProductHunt, recommend on Medium, and so on).
+      p Share the url with early adopters/friends so they can painlessly help you get exposure.
   section.section
     .container.container--large
-      p.lead Cheerladders offers a way to create a page that lists all the ways people can support your project for free.
-  section.section
+      .features
+        .features__item
+          img(src='/assets/create.svg', alt='').features__emoji
+          span.round 1
+          br
+          | Create a page
+        .features__item
+          img(src='/assets/widgets.svg', alt='').features__emoji
+          span.round 2
+          br
+          | Add widgets
+        .features__item
+          img(src='/assets/share.svg', alt='').features__emoji
+          span.round 3
+          br
+          | Share the url
+        .features__item
+          img(src='/assets/support.svg', alt='').features__emoji
+          span.round 4
+          br
+          | Get support
+        .features__item
+          img(src='/assets/audience.svg', alt='').features__emoji
+          span.round 5
+          br
+          | Reach your audience
+  section.section.section--background
     .container
       h3#examples Examples
+      p Below are some examples of what pages look like on cheerladders.xyz
       ul
         for project in projects
           li: a(href='/support/' + project.slug) #{project.name}, #{project.slogan}
   section.section
     .container
       h3#contribute Contribute
-      p This project is open source, adding new widgets is easy as cake.
+      p
+        | cheerladders.xyz is an open source side project.
+        | Feel free to contribute if you know other ways people can support your project (and others).
       ul
         li: a(href='https://github.com/zhouzi/cheerladders') GitHub repository
         li: a(href='https://github.com/zhouzi/cheerladders/issues') Report an issue/Suggest a feature
