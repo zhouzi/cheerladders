@@ -64,7 +64,7 @@
         content: 'What\'s the tweet\'s content?',
       },
       render: function(wrapper, params) {
-        wrapper.innerHTML = '<a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(params.content) + '" target="_blank">Tweet</a>';
+        wrapper.innerHTML = '<a class="twitter-share-button" href="https://twitter.com/intent/tweet?url=%2F&text=' + encodeURIComponent(params.content) + '" target="_blank">Tweet</a>';
         loadTwitterWidget();
       },
     },
