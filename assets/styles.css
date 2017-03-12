@@ -292,3 +292,8 @@ select.input {
     padding: 0 0.5rem;
   }
 }
+
+.alert {
+  padding: 1rem;
+  background-color: #f9e65a;
+}

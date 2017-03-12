@@ -147,7 +147,14 @@
   });
 
   function updateShareLinkUrl() {
-    shareLink.querySelector('a').setAttribute('href', '/support/' + window.projectSlug + '?token=' + window.localStorage.getItem(window.projectSlug));
+    var shareUrl = '/support/' + window.projectSlug + '?token=' + window.localStorage.getItem(window.projectSlug);
+    var shareAnchor = shareLink.querySelector('a');
+
+    shareAnchor.setAttribute('href', shareUrl);
+
+    // this is a "hack" to prepend the current environment's domain
+    shareAnchor.textContent = shareAnchor.href;
+
     shareLink.style.display = '';
   }
 
