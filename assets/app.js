@@ -124,7 +124,7 @@
         window.projectSlug = project.slug;
         window.localStorage.setItem(project.slug, project.token);
 
-        history.replaceState({}, document.title, '/support/' + project.slug + '?token=' + project.token);
+        history.replaceState({}, document.title, '/support/' + project.slug);
 
         renderWidget(widgetId, widgetParams);
         updateShareLinkUrl();
@@ -171,6 +171,7 @@
 
   var token = location.search.match(/token=([A-Za-z0-9_-]+)/);
   if (token != null) {
+    history.replaceState({}, document.title, '/support/' + window.projectSlug);
     window.localStorage.setItem(window.projectSlug, token[1]);
   }
 
