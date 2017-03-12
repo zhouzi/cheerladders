@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const shortid = require('shortid');
 const router = require('express').Router();
 const Project = require('../models/project');
 
@@ -37,6 +38,12 @@ function getProjectPublicProps(project) {
   ]);
 }
 
+function createWidget(widget) {
+  return _.assign({}, widget, {
+    shortid: shortid.generate(),
+  });
+}
+
 router.post('/', (req, res) => {
   const project = _.pick(req.body, [
     'name',
@@ -51,6 +58,8 @@ router.post('/', (req, res) => {
     });
     return;
   }
+
+  project.widgets = project.widgets.map(createWidget);
 
   new Project(project)
     .save()
@@ -87,7 +96,7 @@ router.post('/:slug/widget', (req, res) => {
       return project;
     })
     .then((project) => {
-      project.widgets.push(widget);
+      project.widgets.push(createWidget(widget));
       return project.save();
     })
     .then(project => res.json(getProjectPublicProps(project)))
