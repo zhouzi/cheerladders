@@ -32,8 +32,8 @@ const Project = require('./models/project');
 app.get('/', (req, res) => {
   Project
     .find()
-    .limit(20)
-    .sort({ createdAt: -1 })
+    .limit(4)
+    .sort({ createdAt: 1 })
     .catch()
     .then(projects => res.render('index', { projects, nWidgets: Object.keys(widgets).length }));
 });
